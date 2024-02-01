@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: black;
+            color:white;
+        }
+
+        #input{
+            display:inline-block;
+            margin-top:10px;
+        }
+
+        #cars{
+            width:400px;
+        }
+
+        h1{
+            margin-left:620px;
+            color:#0ef;
+        }
+
+        
+        #main{
+            width:400px;
+            
+            background-color: rgb(49, 54, 54);;
+            display:inline-block;
+            margin-left:100px;;
+        }
+
+
+        #a{
+            margin-left:350px;
+        }
+
+        #btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            background-color: #4CAF50; /* Green color */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left:50px;
+          }
+      
+          /* Hover effect for the submit button */
+          #btn:hover {
+            background-color: #a04571; /* Darker green color on hover */
+          }
+
+          #b{
+            margin-left: 1000px;
+          }
+
+
+
+    </style>
+</head>
+
+
+
+
+
+<body>
+    <h1>📲 Languge Translator 📲</h1>
+    <h3 id="b"></h3>
+
+    <!-- <h1 class="multiple-text2" >Heloo</h1> -->
+    
+    
+    <div id="a">
+        <h3>Select language 👇</h3>
+    <select name="cars" id="cars">
+        <option value="hi-IN">Hindi</option>
+        <option value="gu-IN">Gujarati</option>
+        <option value="ar-SA">Arabic</option>
+
+        <option value="bn-IN">Bengali</option>
+        <option value="fr-FR">French</option>
+        <option value="ja-JP">Japenese</option>
+        <option value="pa-IN">Punjabi</option>
+        <option value="ta-LK">Tamil</option>
+        <option value="es-ES">Spanish</option>
+      </select>
+      <br>
+    
+    <textarea id="input" placeholder="Enter Your Text Here ..." cols="50" rows="10"></textarea>
+    <button id="btn">Translate 🔥</button>
+    
+    <div id="main" class="multiple-text2"></div>
+    </div>
+    
+    
+
+
+</body>
+
+<script src="https://unpkg.com/scrollreveal"></script>
+<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+
+<script>
+    let text="MY Name is Aslaan Khan";
+    let fromLanguage="en-GB";
+    let toLanguage="hi-IN";
+    let string="";
+
+
+    
+    const x=document.querySelector("#btn");
+    const y=document.querySelector("#input");
+    const z=document.querySelector("#cars");
+    const main=document.querySelector("#main");
+    const h1=document.querySelector("#b");
+
+    x.addEventListener('click',(e)=>{
+        e.preventDefault;
+        text=y.value;
+        toLanguage=z.value;
+
+        async function getdata(){
+            try{
+                const res= await fetch(`https://api.mymemory.translated.net/get?q=${text}&langpair=${fromLanguage}|${toLanguage}`); 
+                const ans= await res.json();
+                const p=document.createElement("p");
+                p.innerHTML=ans.responseData.translatedText;
+                //main.appendChild(p);
+                 console.log(ans.responseData.translatedText);
+                 string=ans.responseData.translatedText;
+                 h1.innerHTML="Translated Text 👇"
+
+                 const typed2=new Typed('.multiple-text2',{
+                    strings:[string],
+                    typeSpeed:50,
+                    backSpeed:40,
+                    backDelay:1000,
+                    loop:false,
+                
+                })
+            }
+
+            catch(error){
+                console.log(error);
+            }
+        }
+       getdata();
+
+    })
+
+
+
+
+    
+
+</script>
+</html>
